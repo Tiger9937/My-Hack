@@ -1,4 +1,4 @@
-import Login from './components/auth/login'
+import Singup from './components/auth/singup'
 import './App.css'
 
 function App() {
@@ -7,7 +7,7 @@ function App() {
   return (
     <>
       HELLO WORLD
-      <Login></Login>
+      <Singup></Singup>
     </>
   )
 }

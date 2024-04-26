@@ -8,13 +8,13 @@ export  class Authserves {
 
     constructor(){
         this.Client
-        .setEndpoint(conf.APPWRITE_URL)
-        .setProject(conf.APPWRITE_URL)
+        .setEndpoint(conf.appwriteUrl)
+        .setProject(conf.appwrideprojectid)
         this.account = new Account(this.Client)
     }
-    async creactAcount({email,password,name}){
+    async creactAcount({name,email,password}){
         try {
-            const newAcount = await this.account.create(ID.unique(),email,password,name)
+            const newAcount = await this.account.create(ID.unique(),name,email,password)
             if(newAcount){
                 return Login(email,password)
             }else{
