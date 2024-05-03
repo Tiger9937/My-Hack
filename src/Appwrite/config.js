@@ -9,7 +9,7 @@ export class Authserves {
     constructor(){
         this.Client
         .setEndpoint(conf.APPWRITE_URL)
-        .setProject(conf.APPWRITE_PROJECT_ID)
+        .setProject(conf.APPWRITE_URL)
         this.account = new Account(this.Client)
     }
     async AddHackathon ({Image_Link,Title,About,Organization_name,Location,Time_duration,Date_Start_end,rewards,Status,Online_Offline}){

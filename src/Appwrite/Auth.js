@@ -8,43 +8,62 @@ export  class Authserves {
 
     constructor(){
         this.Client
-        .setEndpoint(conf.appwriteUrl)
-        .setProject(conf.appwrideprojectid)
+        .setEndpoint(conf.APPWRITE_URL)
+        .setProject(conf.APPWRITE_URL)
         this.account = new Account(this.Client)
     }
-    async creactAcount({name,email,password}){
+    
+
+
+    async creactAcount({email, password, name}) {
         try {
-            const newAcount = await this.account.create(ID.unique(),name,email,password)
+            const newAcount = await this.account.create(ID.unique(),email, password, name)
             if(newAcount){
-                return Login(email,password)
+                return this.Login({email,password})
             }else{
                 return newAcount
             }
         } catch (error) {
-             console.log(error)
+            console.log("fock you",error)
         }
     }
-    async Login({email,password}){
-        try {
-            return await this.account.createEmailSession(email, password);
 
-        } catch (error) {
-            console.log(error)
-        }
+    async Login({ email, password }) {
+    try {
+        return await this.account.createEmailSession(email, password)
+    } catch (error) {
+        throw new Error(`Login failed: ${error.message}`);
     }
+    }
+
     async userloginAcount(){
         try {
-            const userAcount = await this.account.get()
-            return userAcount
+            return await this.account.get()
+
         } catch (error) {
-            console.log(error)
+            console.log("fock you",error)
         }
         return null
     }
 
-    async Logout(){
-        const lOGOUT = this.account.deleteSessions()
-        return lOGOUT
+    async getCurrentUser() {
+        try {
+            return await this.account.get();
+        } catch (error) {
+            console.log("Appwrite serive :: getCurrentUser :: error", error);
+        }
+
+        return null;
+    }
+
+
+    async logout() {
+
+        try {
+            await this.account.deleteSessions();
+        } catch (error) {
+            console.log("Appwrite serive :: logout :: error", error);
+        }
     }
 }
 const authServices = new Authserves();

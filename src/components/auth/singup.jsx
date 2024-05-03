@@ -33,6 +33,16 @@ function singup() {
     style={{height:"30rem", width:"rem", background:"#62616161" }}
     >
       <form onClick={handleSubmit(singup)}>
+        
+        {/* Apptest1234 */}
+      <Input type="email"
+          Lebel="Email: "
+          placeholder='enter email'
+          {...register("email",{required: true,
+            validate: { matchPatern: (value) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value) || "Email address must be a valid address plese enter "}
+          })
+        }
+        />
         <Input
         type="text"
         Lebel="name:"
@@ -42,29 +52,13 @@ function singup() {
             required: true
           })
         }
-        
-        />
-        {/* Apptest1234 */}
-      <Input type="email"
-          Lebel="Email: "
-          placeholder='enter email'
-          {...register("email",{
-            required: true,
-            validate: {
-              matchPatern: (value) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value) ||
-              "Email address must be a valid address ",
-            }
-          })
-        }
         />
         <Input type="password"
           Lebel="Password: "
           placeholder=' enter password  '
-          {...register("Password",{
-            required: true,
-          })
-        }
+          {...register("password",{required: true,})}
         />
+
         <Button
           type="submit"
           className="w-full"
